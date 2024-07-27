@@ -2,7 +2,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 interface UserAlbumParams {
   userId: string;
-  id: number; // Bu id'nin benzersiz olduğundan emin olun.
+  id: number;
   title: string;
 }
 
@@ -28,8 +28,6 @@ const Albums = () => {
         <ul>
           {albums.map((album) => (
             <li key={album.id}>
-              {" "}
-              {/* Burada `album.id`'yi kullanıyoruz */}
               <Link to={`/users/${album.userId}/albums/${album.id}`}>
                 {album.title}
               </Link>
