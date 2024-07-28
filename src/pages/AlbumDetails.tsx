@@ -20,7 +20,7 @@ export const detailAlbums = async ({
   };
 }) => {
   const response = await fetch(
-    `https://jsonplaceholder.typicode.com/albums/${params.albumId}/photos`
+    `https://jsonplaceholder.typicode.com/albums/${params.albumId}/photos` //fetchlencek url template stringle oluşturuldu ve parametresi ayarlandı.
   );
   const photos = (await response.json()) as AlbumDetails[];
   return photos;
@@ -29,7 +29,7 @@ export const detailAlbums = async ({
 const AlbumDetails = () => {
   const photos = useLoaderData() as AlbumDetails[];
 
-  const addFavorite = useFavorites((state) => state.addFavorite);
+  const addFavorite = useFavorites((state) => state.addFavorite); //useFavoriteste tanımlanan fonksiyon aynı isimle çağırıldı.
   const removeFavorite = useFavorites((state) => state.removeFavorite);
   const isFavorite = useFavorites((state) => state.isFavorite);
 

@@ -1,7 +1,7 @@
 import { useFavorites } from "../favorites/useFavorites";
 
 const FavoritesCounter = () => {
-  const photosCount = useFavorites((state) => state.photos.length);
+  const photosCount = useFavorites((state) => state.photos.length); //photos arrayinin uzunluğuna göre fav olanları gösteren değişken
 
   return (
     <div
@@ -15,7 +15,7 @@ const FavoritesCounter = () => {
         backgroundColor: "white",
         padding: "5px 10px",
         borderRadius: "5px",
-        boxShadow: "0 0 5px rgba(0,0,0,0.1)",
+        border: "solid 3px #ff0000",
       }}
     >
       <h3>Favorites: {photosCount}</h3>
