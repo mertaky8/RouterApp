@@ -1,4 +1,4 @@
-import { useFavorites } from "./useFavorites"; // useFavorites yerine useFavoritesStore
+import { useFavorites } from "../favorites/useFavorites";
 
 const FavoritesCounter = () => {
   const photosCount = useFavorites((state) => state.photos.length);

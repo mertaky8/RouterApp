@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 interface Photo {
   albumId?: string;
@@ -12,10 +12,20 @@ interface Photo {
 interface FavoritesState {
   photos: Photo[];
   addFavorite: (photo: Photo) => void;
+  removeFavorite: (photo: Photo) => void;
+  isFavorite: (photoId: number) => boolean;
 }
 
-export const useFavorites = create<FavoritesState>((set) => ({
+export const useFavorites = create<FavoritesState>((set, get) => ({
   photos: [],
   addFavorite: (photo: Photo) =>
     set((state) => ({ photos: [...state.photos, photo] })),
+  removeFavorite: (photo: Photo) =>
+    set((state) => ({
+      photos: state.photos.filter((p) => p.id !== photo.id),
+    })),
+  isFavorite: (photoId: number) => {
+    const { photos } = get();
+    return photos.some((p) => p.id === photoId);
+  },
 }));

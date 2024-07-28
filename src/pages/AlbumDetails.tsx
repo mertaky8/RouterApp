@@ -1,18 +1,22 @@
 import { useLoaderData } from "react-router-dom";
 import React from "react";
+import { Button } from "react-bootstrap";
+import { BiLike } from "react-icons/bi";
+import { useFavorites } from "../favorites/useFavorites";
 
 interface AlbumDetails {
   id: number;
   title: string;
   url: string;
   thumbnailUrl: string;
+  userId?: number;
 }
 
 export const detailAlbums = async ({
   params,
 }: {
   params: {
-    albumId: string; // Burada albüm ID'sini alıyoruz
+    albumId: string;
   };
 }) => {
   const response = await fetch(
@@ -25,6 +29,19 @@ export const detailAlbums = async ({
 const AlbumDetails = () => {
   const photos = useLoaderData() as AlbumDetails[];
 
+  const addFavorite = useFavorites((state) => state.addFavorite);
+  const removeFavorite = useFavorites((state) => state.removeFavorite);
+  const isFavorite = useFavorites((state) => state.isFavorite);
+
+  const handleToggleFavorite = (photo: AlbumDetails) => {
+    const photoWithUserId = { ...photo, userId: photo.userId || 1 };
+    if (isFavorite(photoWithUserId.id)) {
+      removeFavorite(photoWithUserId);
+    } else {
+      addFavorite(photoWithUserId);
+    }
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -35,8 +52,26 @@ const AlbumDetails = () => {
               <img
                 src={photo.url}
                 alt={photo.title}
-                style={{ maxHeight: "100px", maxWidth: "100px" }}
+                style={{
+                  display: "flex",
+                  maxHeight: "100px",
+                  maxWidth: "100px",
+                }}
               />
+              <Button
+                variant="dark"
+                style={{
+                  background: "white",
+                  marginTop: "10px",
+                }}
+                onClick={() => handleToggleFavorite(photo)}
+              >
+                <BiLike
+                  style={{
+                    color: isFavorite(photo.id) ? "#ff0000" : "#000000",
+                  }}
+                />
+              </Button>
             </li>
           ))}
         </ul>
