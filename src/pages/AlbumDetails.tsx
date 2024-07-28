@@ -68,7 +68,7 @@ const AlbumDetails = () => {
               >
                 <BiLike
                   style={{
-                    color: isFavorite(photo.id) ? "#ff0000" : "#000000",
+                    color: "#000000",
                   }}
                 />
               </Button>
