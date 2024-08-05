@@ -13,7 +13,7 @@ export const rootLoader = async ({
   params: { userId: string };
 }) => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
-  const users = await response.json(); //as UserParams eşitliği.
+  const users = await response.json();
   console.log(params);
   return users;
 };
